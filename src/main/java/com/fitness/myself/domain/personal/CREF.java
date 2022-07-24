@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Entity
 public class CREF extends BaseEntity {
@@ -26,4 +25,9 @@ public class CREF extends BaseEntity {
 
     @OneToMany(mappedBy = "cref")
     private List<Personal> personais = new ArrayList<>();
+
+    public CREF(UF uf, String codigo) {
+        this.uf = uf;
+        this.codigo = codigo;
+    }
 }

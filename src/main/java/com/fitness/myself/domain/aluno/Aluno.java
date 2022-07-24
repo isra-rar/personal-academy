@@ -6,6 +6,7 @@ import com.fitness.myself.domain.personal.Personal;
 import com.fitness.myself.domain.valuesObjects.CPF;
 import com.fitness.myself.domain.valuesObjects.Email;
 import com.fitness.myself.domain.valuesObjects.Telefone;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class Aluno extends Usuario {
     @ManyToOne
     private Personal personal;
 
+    @Builder
     public Aluno(String nome, CPF cpf, Email email, Telefone telefone, String password, String nomeAcademia, TipoPlano tipoPlano, FichaPessoal fichaPessoal, Personal personal) {
         super(nome, cpf, email, telefone, password);
         this.nomeAcademia = nomeAcademia;
