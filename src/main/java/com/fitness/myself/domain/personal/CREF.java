@@ -1,5 +1,6 @@
 package com.fitness.myself.domain.personal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fitness.myself.domain.baseAbstract.BaseEntity;
 import com.fitness.myself.domain.enums.UF;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class CREF extends BaseEntity {
 
     private String codigo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cref")
     private List<Personal> personais = new ArrayList<>();
 
