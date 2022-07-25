@@ -13,7 +13,7 @@ import java.net.URI;
 public class PersonalController extends GenericController<IPersonalService>{
 
     @PostMapping()
-    public ResponseEntity<Personal> insert(@RequestBody Personal obj) {
+    public ResponseEntity<Personal> insertPersonal(@RequestBody Personal obj) {
         Personal personal = getService().insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(personal.getId()).toUri();

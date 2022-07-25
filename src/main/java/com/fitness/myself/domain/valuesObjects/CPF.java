@@ -9,7 +9,6 @@ import static com.fitness.myself.domain.utils.RegexUtil.REGEX_CPF;
 
 @NoArgsConstructor
 @Getter
-@Embeddable
 public class CPF {
 
     private String cpf;

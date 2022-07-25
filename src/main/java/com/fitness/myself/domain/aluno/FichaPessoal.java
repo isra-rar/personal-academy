@@ -1,5 +1,6 @@
 package com.fitness.myself.domain.aluno;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fitness.myself.domain.baseAbstract.BaseEntity;
 import com.fitness.myself.domain.enums.Sexo;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class FichaPessoal extends BaseEntity {
 
@@ -27,7 +27,15 @@ public class FichaPessoal extends BaseEntity {
     private Double altura;
     private String objetivo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "fichaPessoal")
     private List<Aluno> alunos = new ArrayList<>();
 
+    public FichaPessoal(Date dataNascimento, Sexo sexo, int peso, Double altura, String objetivo) {
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        this.peso = peso;
+        this.altura = altura;
+        this.objetivo = objetivo;
+    }
 }

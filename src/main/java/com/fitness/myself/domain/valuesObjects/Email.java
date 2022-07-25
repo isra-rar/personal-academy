@@ -9,7 +9,6 @@ import static com.fitness.myself.domain.utils.RegexUtil.REGEX_EMAIL;
 
 @NoArgsConstructor
 @Getter
-@Embeddable
 public class Email {
 
     private String enderecoEmail;

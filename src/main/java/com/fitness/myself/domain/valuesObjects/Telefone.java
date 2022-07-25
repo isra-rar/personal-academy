@@ -9,7 +9,6 @@ import static com.fitness.myself.domain.utils.RegexUtil.REGEX_TELEFONE;
 
 @NoArgsConstructor
 @Getter
-@Embeddable
 public class Telefone {
 
     private String numeroTelefone;

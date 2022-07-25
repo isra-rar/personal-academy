@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 
 @NoArgsConstructor
@@ -16,9 +17,16 @@ import javax.persistence.MappedSuperclass;
 public abstract class Usuario extends BaseEntity {
 
     private String nome;
+    @Embedded
     private CPF cpf;
+    @Embedded
     private Email email;
+    @Embedded
     private Telefone telefone;
     private String password;
+
+    public void setCpf(CPF cpf) {
+        this.cpf = cpf;
+    }
 
 }
