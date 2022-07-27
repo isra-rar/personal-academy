@@ -21,9 +21,6 @@ public class AlunoServiceImpl extends GenericServiceImpl<IAlunoRepository> imple
     @Autowired
     private PersonalService personalService;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
     @Override
     public Aluno insert(Aluno entity) {
         return getRepository().save(entity);

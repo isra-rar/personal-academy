@@ -1,8 +1,6 @@
 package com.fitness.myself.repositories;
 
-import com.fitness.myself.domain.aluno.Aluno;
-import com.fitness.myself.domain.aluno.FichaTreino;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.fitness.myself.domain.treino.FichaTreino;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -3,6 +3,7 @@ package com.fitness.myself.domain.aluno;
 import com.fitness.myself.domain.baseAbstract.Usuario;
 import com.fitness.myself.domain.enums.TipoPlano;
 import com.fitness.myself.domain.personal.Personal;
+import com.fitness.myself.domain.treino.FichaTreino;
 import com.fitness.myself.domain.valuesObjects.CPF;
 import com.fitness.myself.domain.valuesObjects.Email;
 import com.fitness.myself.domain.valuesObjects.Telefone;

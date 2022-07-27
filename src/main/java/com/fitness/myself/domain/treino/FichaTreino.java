@@ -1,5 +1,6 @@
-package com.fitness.myself.domain.aluno;
+package com.fitness.myself.domain.treino;
 
+import com.fitness.myself.domain.aluno.Aluno;
 import com.fitness.myself.domain.baseAbstract.BaseEntity;
 import com.fitness.myself.domain.enums.TipoFicha;
 import com.fitness.myself.domain.personal.Personal;

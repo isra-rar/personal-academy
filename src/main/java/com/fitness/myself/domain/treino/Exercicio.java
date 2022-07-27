@@ -1,4 +1,4 @@
-package com.fitness.myself.domain.aluno;
+package com.fitness.myself.domain.treino;
 
 import com.fitness.myself.domain.baseAbstract.BaseEntity;
 import com.fitness.myself.domain.enums.GrupoMuscular;
