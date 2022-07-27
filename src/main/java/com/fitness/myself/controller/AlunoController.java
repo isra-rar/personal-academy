@@ -1,6 +1,7 @@
 package com.fitness.myself.controller;
 
 import com.fitness.myself.domain.DTO.AlunoDTO;
+import com.fitness.myself.domain.DTO.PersonalDTO;
 import com.fitness.myself.domain.aluno.Aluno;
 import com.fitness.myself.services.AlunoService;
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/aluno")
@@ -27,6 +29,11 @@ public class AlunoController extends GenericController<AlunoService>{
     public ResponseEntity<AlunoDTO> findAlunoById(@PathVariable Long id) {
         Aluno aluno = getService().findById(id);
         return ResponseEntity.ok(getService().toAlunoDTO(aluno));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AlunoDTO>> getAllAlunos() {
+        return ResponseEntity.ok(getService().findlAllAlunos());
     }
 
     @DeleteMapping(value = "/{id}")

@@ -11,13 +11,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonalServiceImpl extends GenericServiceImpl<IPersonalRepository> implements PersonalService {
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Override
     public Personal insert(Personal entity) {
@@ -35,6 +34,15 @@ public class PersonalServiceImpl extends GenericServiceImpl<IPersonalRepository>
         Personal personal = findById(id);
         getRepository().delete(personal) ;
     }
+    @Override
+    public List<PersonalDTO> findAllPersonais() {
+        List<Personal> personalList = getRepository().findAll();
+        return toPersonalListDTO(personalList);
+    }
+
+    private List<PersonalDTO> toPersonalListDTO(List<Personal> personalList) {
+        return mapList(personalList, PersonalDTO.class);
+    }
 
     @Override
     public PersonalDTO toPersonalDTO(Personal personal) {
@@ -45,4 +53,5 @@ public class PersonalServiceImpl extends GenericServiceImpl<IPersonalRepository>
     public Personal toPersonal(PersonalDTO personalDTO) {
         return modelMapper.map(personalDTO, Personal.class);
     }
+
 }

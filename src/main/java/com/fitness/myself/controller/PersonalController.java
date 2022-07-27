@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/personal")
@@ -27,6 +28,11 @@ public class PersonalController extends GenericController<PersonalService>{
     public ResponseEntity<PersonalDTO> findPersonalById(@PathVariable Long id) {
         Personal personal = getService().findById(id);
         return ResponseEntity.ok(getService().toPersonalDTO(personal));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PersonalDTO>> getAllPersonais() {
+        return ResponseEntity.ok(getService().findAllPersonais());
     }
 
     @DeleteMapping(value = "/{id}")

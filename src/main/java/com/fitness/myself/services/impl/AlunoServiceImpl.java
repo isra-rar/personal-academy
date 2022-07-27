@@ -1,6 +1,7 @@
 package com.fitness.myself.services.impl;
 
 import com.fitness.myself.domain.DTO.AlunoDTO;
+import com.fitness.myself.domain.DTO.PersonalDTO;
 import com.fitness.myself.domain.aluno.Aluno;
 import com.fitness.myself.domain.personal.Personal;
 import com.fitness.myself.repositories.IAlunoRepository;
@@ -11,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,6 +51,12 @@ public class AlunoServiceImpl extends GenericServiceImpl<IAlunoRepository> imple
     }
 
     @Override
+    public List<AlunoDTO> findlAllAlunos() {
+        List<Aluno> personalList = getRepository().findAll();
+        return toAlunoListDTO(personalList);
+    }
+
+    @Override
     public AlunoDTO toAlunoDTO(Aluno aluno) {
         return modelMapper.map(aluno, AlunoDTO.class);
     }
@@ -57,5 +65,11 @@ public class AlunoServiceImpl extends GenericServiceImpl<IAlunoRepository> imple
     public Aluno toAluno(AlunoDTO alunoDTO) {
         return modelMapper.map(alunoDTO, Aluno.class);
     }
+
+    private List<AlunoDTO> toAlunoListDTO(List<Aluno> alunoList) {
+        return mapList(alunoList, AlunoDTO.class);
+    }
+
+
 
 }
