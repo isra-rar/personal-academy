@@ -1,16 +1,26 @@
 package com.fitness.myself.services.impl;
 
+import com.fitness.myself.domain.DTO.AlunoDTO;
 import com.fitness.myself.domain.aluno.Aluno;
 import com.fitness.myself.domain.personal.Personal;
 import com.fitness.myself.repositories.IAlunoRepository;
-import com.fitness.myself.services.IAlunoService;
+import com.fitness.myself.services.AlunoService;
+import com.fitness.myself.services.PersonalService;
 import com.fitness.myself.services.exceptions.ResourceNotFoundException;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class AlunoServiceImpl extends GenericServiceImpl<IAlunoRepository> implements IAlunoService {
+public class AlunoServiceImpl extends GenericServiceImpl<IAlunoRepository> implements AlunoService {
+
+    @Autowired
+    private PersonalService personalService;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     public Aluno insert(Aluno entity) {
@@ -28,4 +38,24 @@ public class AlunoServiceImpl extends GenericServiceImpl<IAlunoRepository> imple
         Aluno aluno = findById(id);
         getRepository().delete(aluno);
     }
+
+    @Override
+    public void atribuirAluno(Long alunoId, Long personalId) {
+        Personal personal = personalService.findById(personalId);
+        Aluno aluno = findById(alunoId);
+
+        aluno.atribuirPersonal(personal);
+        getRepository().save(aluno);
+    }
+
+    @Override
+    public AlunoDTO toAlunoDTO(Aluno aluno) {
+        return modelMapper.map(aluno, AlunoDTO.class);
+    }
+
+    @Override
+    public Aluno toAluno(AlunoDTO alunoDTO) {
+        return modelMapper.map(alunoDTO, Aluno.class);
+    }
+
 }

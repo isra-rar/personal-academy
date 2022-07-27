@@ -1,9 +1,11 @@
 package com.fitness.myself.domain.aluno;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fitness.myself.domain.baseAbstract.BaseEntity;
 import com.fitness.myself.domain.enums.Sexo;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -15,9 +17,11 @@ import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
+@Getter
 @Entity
 public class FichaPessoal extends BaseEntity {
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "GMT")
     private Date dataNascimento;
 
     @Enumerated(EnumType.STRING)

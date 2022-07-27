@@ -25,8 +25,4 @@ public abstract class Usuario extends BaseEntity {
     private Telefone telefone;
     private String password;
 
-    public void setCpf(CPF cpf) {
-        this.cpf = cpf;
-    }
-
 }

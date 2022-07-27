@@ -1,5 +1,6 @@
 package com.fitness.myself.domain.personal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fitness.myself.domain.aluno.Aluno;
 import com.fitness.myself.domain.baseAbstract.Usuario;
 import com.fitness.myself.domain.valuesObjects.CPF;
@@ -27,19 +28,13 @@ public class Personal extends Usuario {
     @ManyToOne(cascade = CascadeType.ALL)
     private CREF cref;
 
+
     @OneToMany(mappedBy = "personal")
-    private List<Aluno> alunos = new ArrayList<>();
+    private List<Aluno> alunos = new ArrayList<>(); // RELACIONAMENTO UNILATERAL EM ALUNO
 
     @Builder
     public Personal(String nome, CPF cpf, Email email, Telefone telefone, String password, CREF cref) {
         super(nome, cpf, email, telefone, password);
         this.cref = cref;
-    }
-
-    public void addAluno(Aluno aluno) {
-        if (aluno == null) {
-            throw new IllegalArgumentException("Aluno invalido");
-        }
-        alunos.add(aluno);
     }
 }

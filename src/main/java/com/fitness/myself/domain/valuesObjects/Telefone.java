@@ -3,8 +3,6 @@ package com.fitness.myself.domain.valuesObjects;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embeddable;
-
 import static com.fitness.myself.domain.utils.RegexUtil.REGEX_TELEFONE;
 
 @NoArgsConstructor

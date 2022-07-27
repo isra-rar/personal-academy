@@ -1,9 +1,10 @@
 package com.fitness.myself.controller;
 
+import com.fitness.myself.domain.DTO.AlunoDTO;
 import com.fitness.myself.domain.aluno.Aluno;
-import com.fitness.myself.domain.personal.Personal;
-import com.fitness.myself.services.IAlunoService;
-import com.fitness.myself.services.IPersonalService;
+import com.fitness.myself.services.AlunoService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,24 +13,31 @@ import java.net.URI;
 
 @RestController
 @RequestMapping(value = "api/aluno")
-public class AlunoController extends GenericController<IAlunoService>{
+public class AlunoController extends GenericController<AlunoService>{
 
     @PostMapping()
-    public ResponseEntity<Aluno> insertAluno(@RequestBody Aluno obj) {
+    public ResponseEntity<AlunoDTO> insertAluno(@RequestBody Aluno obj) {
         Aluno aluno = getService().insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(aluno.getId()).toUri();
-        return ResponseEntity.created(uri).body(aluno);
+        return ResponseEntity.created(uri).body(getService().toAlunoDTO(aluno));
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Aluno> findAlunoById(@PathVariable Long id) {
-        return ResponseEntity.ok(getService().findById(id));
+    public ResponseEntity<AlunoDTO> findAlunoById(@PathVariable Long id) {
+        Aluno aluno = getService().findById(id);
+        return ResponseEntity.ok(getService().toAlunoDTO(aluno));
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteAlunoById(@PathVariable Long id) {
         getService().delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{alunoId}")
+    public ResponseEntity atribuirPersonalAluno(@PathVariable Long alunoId, @RequestHeader Long personalId) {
+        getService().atribuirAluno(alunoId, personalId);
         return ResponseEntity.noContent().build();
     }
 }

@@ -46,4 +46,7 @@ public class Aluno extends Usuario {
         this.fichaPessoal = fichaPessoal;
     }
 
+    public void atribuirPersonal(Personal personal) {
+        this.personal = personal;
+    }
 }
