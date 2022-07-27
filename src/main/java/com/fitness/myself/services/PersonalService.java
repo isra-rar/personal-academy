@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface PersonalService extends GenericService<Personal> {
 
+    Personal insert(Personal entity);
     PersonalDTO toPersonalDTO(Personal personal);
     Personal toPersonal(PersonalDTO personalDTO);
     List<PersonalDTO> findAllPersonais();

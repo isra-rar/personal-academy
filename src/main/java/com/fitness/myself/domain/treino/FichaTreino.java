@@ -1,5 +1,6 @@
 package com.fitness.myself.domain.treino;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fitness.myself.domain.aluno.Aluno;
 import com.fitness.myself.domain.baseAbstract.BaseEntity;
 import com.fitness.myself.domain.enums.TipoFicha;
@@ -19,19 +20,37 @@ import java.util.List;
 @Entity
 public class FichaTreino extends BaseEntity {
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "GMT")
     private LocalDate dataInicio;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "GMT")
     private LocalDate dataFim;
 
     @Enumerated(EnumType.STRING)
     private TipoFicha tipoFicha;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name = "fichaTreino_exercicio",
+            joinColumns =
+            @JoinColumn(name = "fichaTreino_id"),
+            inverseJoinColumns =
+            @JoinColumn(name = "exercicio_id"))
     private List<Exercicio> exercicios = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "fichaTreinos", fetch = FetchType.LAZY)
-    private List<Aluno> alunos = new ArrayList<>();
+    @ManyToOne
+    private Aluno aluno;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Personal personal;
 
+    public void atribuirPersonal(Personal personal) {
+        this.personal = personal;
+    }
+
+    public void atribuirFichaAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
+    public void adicionarExercicio(Exercicio exercicio) {
+        this.exercicios.add(exercicio);
+    }
 }

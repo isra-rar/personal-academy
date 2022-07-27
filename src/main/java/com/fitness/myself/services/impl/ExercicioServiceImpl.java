@@ -1,8 +1,9 @@
-package com.fitness.myself.services;
+package com.fitness.myself.services.impl;
 
 import com.fitness.myself.domain.DTO.ExercicioDTO;
 import com.fitness.myself.domain.treino.Exercicio;
 import com.fitness.myself.repositories.IExercicioRepository;
+import com.fitness.myself.services.ExercicioService;
 import com.fitness.myself.services.exceptions.ResourceNotFoundException;
 import com.fitness.myself.services.impl.GenericServiceImpl;
 import org.springframework.stereotype.Service;

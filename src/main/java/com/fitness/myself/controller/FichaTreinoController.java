@@ -8,21 +8,22 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/fichaTreino")
 public class FichaTreinoController extends GenericController<FichaTreinoService>{
 
-    @PostMapping()
-    public ResponseEntity<FichaTreinoDTO> insertFichaTreino(@RequestBody FichaTreino obj) {
-        FichaTreino fichaTreino = getService().insert(obj);
+    @PostMapping
+    public ResponseEntity<FichaTreinoDTO> insertFichaTreino(@RequestBody FichaTreino obj, @RequestHeader Long personalId, @RequestHeader Long alunoId) {
+        FichaTreino fichaTreino = getService().insertFichaTreino(obj, personalId, alunoId);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(fichaTreino.getId()).toUri();
         return ResponseEntity.created(uri).body(getService().toFichaTreinoDTO(fichaTreino));
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<FichaTreinoDTO> findAlunoById(@PathVariable Long id) {
+    public ResponseEntity<FichaTreinoDTO> findFichaTreinoById(@PathVariable Long id) {
         FichaTreino fichaTreino = getService().findById(id);
         return ResponseEntity.ok(getService().toFichaTreinoDTO(fichaTreino));
     }
@@ -30,6 +31,12 @@ public class FichaTreinoController extends GenericController<FichaTreinoService>
     @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteFichaTreinoById(@PathVariable Long id) {
         getService().delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity adicionarExercicioFicha(@PathVariable Long id, @RequestBody List<Long> ids) {
+        getService().adicionarExerciciosALista(id, ids);
         return ResponseEntity.noContent().build();
     }
 

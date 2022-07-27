@@ -7,10 +7,11 @@ import java.util.List;
 
 public interface AlunoService extends GenericService<Aluno> {
 
-    void atribuirAluno(Long alunoId, Long personalId);
+    Aluno insertAluno(Aluno obj, Long personalId);
 
     AlunoDTO toAlunoDTO(Aluno aluno);
     Aluno toAluno(AlunoDTO alunoDTO);
 
     List<AlunoDTO> findlAllAlunos();
+
 }

@@ -29,11 +29,7 @@ public class Aluno extends Usuario {
     @ManyToOne(cascade = CascadeType.ALL)
     private FichaPessoal fichaPessoal;
 
-    @ManyToMany
-    @JoinTable(
-            name = "aluno_fichaTreino",
-            joinColumns = @JoinColumn(name = "aluno_id"),
-            inverseJoinColumns = @JoinColumn(name = "fichaTreino_id"))
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
     private List<FichaTreino> fichaTreinos = new ArrayList<>();
 
     @ManyToOne

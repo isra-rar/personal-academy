@@ -6,9 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,5 +22,8 @@ public class Exercicio extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private GrupoMuscular grupoMuscular;
+
+    @ManyToMany(mappedBy = "exercicios")
+    private List<FichaTreino> fichaTreinos = new ArrayList<>();
 
 }

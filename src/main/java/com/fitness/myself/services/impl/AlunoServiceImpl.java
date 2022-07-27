@@ -22,8 +22,10 @@ public class AlunoServiceImpl extends GenericServiceImpl<IAlunoRepository> imple
     private PersonalService personalService;
 
     @Override
-    public Aluno insert(Aluno entity) {
-        return getRepository().save(entity);
+    public Aluno insertAluno(Aluno aluno, Long personalId) {
+        Personal personal = personalService.findById(personalId);
+        aluno.atribuirPersonal(personal);
+        return getRepository().save(aluno);
     }
 
     @Override
@@ -38,14 +40,7 @@ public class AlunoServiceImpl extends GenericServiceImpl<IAlunoRepository> imple
         getRepository().delete(aluno);
     }
 
-    @Override
-    public void atribuirAluno(Long alunoId, Long personalId) {
-        Personal personal = personalService.findById(personalId);
-        Aluno aluno = findById(alunoId);
 
-        aluno.atribuirPersonal(personal);
-        getRepository().save(aluno);
-    }
 
     @Override
     public List<AlunoDTO> findlAllAlunos() {

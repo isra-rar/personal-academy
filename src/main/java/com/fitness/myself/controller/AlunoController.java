@@ -18,8 +18,8 @@ import java.util.List;
 public class AlunoController extends GenericController<AlunoService>{
 
     @PostMapping()
-    public ResponseEntity<AlunoDTO> insertAluno(@RequestBody Aluno obj) {
-        Aluno aluno = getService().insert(obj);
+    public ResponseEntity<AlunoDTO> insertAluno(@RequestBody Aluno obj, @RequestHeader Long personalId) {
+        Aluno aluno = getService().insertAluno(obj, personalId);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(aluno.getId()).toUri();
         return ResponseEntity.created(uri).body(getService().toAlunoDTO(aluno));
@@ -39,12 +39,6 @@ public class AlunoController extends GenericController<AlunoService>{
     @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteAlunoById(@PathVariable Long id) {
         getService().delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping(value = "/{alunoId}")
-    public ResponseEntity atribuirPersonalAluno(@PathVariable Long alunoId, @RequestHeader Long personalId) {
-        getService().atribuirAluno(alunoId, personalId);
         return ResponseEntity.noContent().build();
     }
 }
