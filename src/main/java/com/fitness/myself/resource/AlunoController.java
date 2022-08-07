@@ -1,11 +1,9 @@
-package com.fitness.myself.controller;
+package com.fitness.myself.resource;
 
-import com.fitness.myself.domain.DTO.AlunoDTO;
-import com.fitness.myself.domain.DTO.PersonalDTO;
+import com.fitness.myself.domain.DTO.request.AlunoRequestDTO;
+import com.fitness.myself.domain.DTO.response.AlunoResponseDTO;
 import com.fitness.myself.domain.aluno.Aluno;
 import com.fitness.myself.services.AlunoService;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,22 +15,26 @@ import java.util.List;
 @RequestMapping(value = "api/aluno")
 public class AlunoController extends GenericController<AlunoService>{
 
+    public AlunoController(AlunoService service) {
+        super(service);
+    }
+
     @PostMapping()
-    public ResponseEntity<AlunoDTO> insertAluno(@RequestBody Aluno obj, @RequestHeader Long personalId) {
-        Aluno aluno = getService().insertAluno(obj, personalId);
+    public ResponseEntity<AlunoResponseDTO> insertAluno(@RequestBody AlunoRequestDTO obj) {
+        AlunoResponseDTO aluno = getService().insertAluno(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(aluno.getId()).toUri();
-        return ResponseEntity.created(uri).body(getService().toAlunoDTO(aluno));
+        return ResponseEntity.created(uri).body(aluno);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<AlunoDTO> findAlunoById(@PathVariable Long id) {
+    public ResponseEntity<AlunoResponseDTO> findAlunoById(@PathVariable Long id) {
         Aluno aluno = getService().findById(id);
         return ResponseEntity.ok(getService().toAlunoDTO(aluno));
     }
 
     @GetMapping
-    public ResponseEntity<List<AlunoDTO>> getAllAlunos() {
+    public ResponseEntity<List<AlunoResponseDTO>> getAllAlunos() {
         return ResponseEntity.ok(getService().findlAllAlunos());
     }
 

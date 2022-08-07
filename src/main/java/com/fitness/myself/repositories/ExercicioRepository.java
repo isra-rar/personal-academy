@@ -4,5 +4,5 @@ import com.fitness.myself.domain.treino.Exercicio;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IExercicioRepository extends IRepository<Exercicio> {
+public interface ExercicioRepository extends GenericRepository<Exercicio> {
 }

@@ -1,31 +1,34 @@
 package com.fitness.myself.services.impl;
 
-import com.fitness.myself.domain.DTO.FichaTreinoDTO;
-import com.fitness.myself.domain.treino.Exercicio;
+import com.fitness.myself.domain.DTO.response.FichaTreinoDTO;
 import com.fitness.myself.domain.treino.FichaTreino;
-import com.fitness.myself.repositories.IFichaTreinoRepository;
+import com.fitness.myself.repositories.FichaTreinoRepository;
 import com.fitness.myself.services.AlunoService;
 import com.fitness.myself.services.ExercicioService;
 import com.fitness.myself.services.FichaTreinoService;
 import com.fitness.myself.services.PersonalService;
 import com.fitness.myself.services.exceptions.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class FichaTreinoServiceImpl extends GenericServiceImpl<IFichaTreinoRepository> implements FichaTreinoService {
+public class FichaTreinoServiceImpl extends GenericServiceImpl<FichaTreinoRepository> implements FichaTreinoService {
 
-    @Autowired
-    private PersonalService personalService;
+    private final PersonalService personalService;
 
-    @Autowired
-    private AlunoService alunoService;
+    private final AlunoService alunoService;
 
-    @Autowired
-    private ExercicioService exercicioService;
+    private final ExercicioService exercicioService;
+
+    public FichaTreinoServiceImpl(FichaTreinoRepository repository, ModelMapper modelMapper, PersonalService personalService, AlunoService alunoService, ExercicioService exercicioService) {
+        super(repository, modelMapper);
+        this.personalService = personalService;
+        this.alunoService = alunoService;
+        this.exercicioService = exercicioService;
+    }
 
 
     @Override

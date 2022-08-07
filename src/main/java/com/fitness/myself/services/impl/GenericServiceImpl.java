@@ -1,19 +1,19 @@
 package com.fitness.myself.services.impl;
 
-import com.fitness.myself.repositories.IRepository;
+import com.fitness.myself.repositories.GenericRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class GenericServiceImpl<T extends IRepository> {
+@RequiredArgsConstructor
+public abstract class GenericServiceImpl<T extends GenericRepository> {
 
-    @Autowired
-    private T repository;
+    private final T repository;
 
-    @Autowired
-    protected ModelMapper modelMapper;
+    protected final ModelMapper modelMapper;
 
     public T getRepository(){
         return repository;

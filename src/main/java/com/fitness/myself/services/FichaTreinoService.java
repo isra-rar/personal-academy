@@ -1,6 +1,6 @@
 package com.fitness.myself.services;
 
-import com.fitness.myself.domain.DTO.FichaTreinoDTO;
+import com.fitness.myself.domain.DTO.response.FichaTreinoDTO;
 import com.fitness.myself.domain.treino.FichaTreino;
 
 import java.util.List;

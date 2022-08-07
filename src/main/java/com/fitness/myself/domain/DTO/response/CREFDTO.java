@@ -1,4 +1,4 @@
-package com.fitness.myself.domain.DTO;
+package com.fitness.myself.domain.DTO.response;
 
 import com.fitness.myself.domain.enums.UF;
 import lombok.Getter;

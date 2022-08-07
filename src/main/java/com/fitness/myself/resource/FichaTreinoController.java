@@ -1,6 +1,6 @@
-package com.fitness.myself.controller;
+package com.fitness.myself.resource;
 
-import com.fitness.myself.domain.DTO.FichaTreinoDTO;
+import com.fitness.myself.domain.DTO.response.FichaTreinoDTO;
 import com.fitness.myself.domain.treino.FichaTreino;
 import com.fitness.myself.services.FichaTreinoService;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "api/fichaTreino")
 public class FichaTreinoController extends GenericController<FichaTreinoService>{
+
+    public FichaTreinoController(FichaTreinoService service) {
+        super(service);
+    }
 
     @PostMapping
     public ResponseEntity<FichaTreinoDTO> insertFichaTreino(@RequestBody FichaTreino obj, @RequestHeader Long personalId, @RequestHeader Long alunoId) {

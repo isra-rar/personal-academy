@@ -1,17 +1,17 @@
 package com.fitness.myself.services;
 
-import com.fitness.myself.domain.DTO.AlunoDTO;
+import com.fitness.myself.domain.DTO.request.AlunoRequestDTO;
+import com.fitness.myself.domain.DTO.response.AlunoResponseDTO;
 import com.fitness.myself.domain.aluno.Aluno;
 
 import java.util.List;
 
 public interface AlunoService extends GenericService<Aluno> {
 
-    Aluno insertAluno(Aluno obj, Long personalId);
+    AlunoResponseDTO insertAluno(AlunoRequestDTO obj);
 
-    AlunoDTO toAlunoDTO(Aluno aluno);
-    Aluno toAluno(AlunoDTO alunoDTO);
+    AlunoResponseDTO toAlunoDTO(Aluno aluno);
 
-    List<AlunoDTO> findlAllAlunos();
+    List<AlunoResponseDTO> findlAllAlunos();
 
 }

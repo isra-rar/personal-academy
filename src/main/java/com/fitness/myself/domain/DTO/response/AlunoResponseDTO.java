@@ -1,17 +1,14 @@
-package com.fitness.myself.domain.DTO;
+package com.fitness.myself.domain.DTO.response;
 
-import com.fitness.myself.domain.enums.TipoPlano;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AlunoDTO {
+public class AlunoResponseDTO {
 
     private Long id;
-    private String nome;
-    private String email;
-    private String telefone;
+    private UsuarioDTO usuario;
     private String nomeAcademia;
     private String tipoPlano;
 

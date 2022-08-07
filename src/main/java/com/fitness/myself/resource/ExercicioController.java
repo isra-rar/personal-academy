@@ -1,6 +1,6 @@
-package com.fitness.myself.controller;
+package com.fitness.myself.resource;
 
-import com.fitness.myself.domain.DTO.ExercicioDTO;
+import com.fitness.myself.domain.DTO.response.ExercicioDTO;
 import com.fitness.myself.domain.treino.Exercicio;
 import com.fitness.myself.services.ExercicioService;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "api/exercicio")
 public class ExercicioController extends GenericController<ExercicioService>{
+
+    public ExercicioController(ExercicioService service) {
+        super(service);
+    }
 
     @PostMapping()
     public ResponseEntity<ExercicioDTO> insertExercicio(@RequestBody Exercicio obj) {

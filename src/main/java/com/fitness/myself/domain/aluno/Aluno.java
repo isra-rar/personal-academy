@@ -1,12 +1,10 @@
 package com.fitness.myself.domain.aluno;
 
-import com.fitness.myself.domain.baseAbstract.Usuario;
+import com.fitness.myself.domain.baseAbstract.BaseEntity;
+import com.fitness.myself.domain.usuario.Usuario;
 import com.fitness.myself.domain.enums.TipoPlano;
 import com.fitness.myself.domain.personal.Personal;
 import com.fitness.myself.domain.treino.FichaTreino;
-import com.fitness.myself.domain.valuesObjects.CPF;
-import com.fitness.myself.domain.valuesObjects.Email;
-import com.fitness.myself.domain.valuesObjects.Telefone;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,11 +18,14 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Aluno extends Usuario {
+public class Aluno extends BaseEntity {
 
     private String nomeAcademia;
     @Enumerated(EnumType.STRING)
     private TipoPlano tipoPlano;
+
+    @ManyToOne
+    private Usuario usuario;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private FichaPessoal fichaPessoal;
@@ -36,8 +37,7 @@ public class Aluno extends Usuario {
     private Personal personal;
 
     @Builder
-    public Aluno(String nome, CPF cpf, Email email, Telefone telefone, String password, String nomeAcademia, TipoPlano tipoPlano, FichaPessoal fichaPessoal) {
-        super(nome, cpf, email, telefone, password);
+    public Aluno(String nomeAcademia, TipoPlano tipoPlano, FichaPessoal fichaPessoal) {
         this.nomeAcademia = nomeAcademia;
         this.tipoPlano = tipoPlano;
         this.fichaPessoal = fichaPessoal;
@@ -45,5 +45,9 @@ public class Aluno extends Usuario {
 
     public void atribuirPersonal(Personal personal) {
         this.personal = personal;
+    }
+
+    public void atribuirUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

@@ -1,19 +1,23 @@
 package com.fitness.myself.services.impl;
 
-import com.fitness.myself.domain.DTO.ExercicioDTO;
+import com.fitness.myself.domain.DTO.response.ExercicioDTO;
 import com.fitness.myself.domain.treino.Exercicio;
-import com.fitness.myself.repositories.IExercicioRepository;
+import com.fitness.myself.repositories.ExercicioRepository;
 import com.fitness.myself.services.ExercicioService;
 import com.fitness.myself.services.exceptions.ResourceNotFoundException;
-import com.fitness.myself.services.impl.GenericServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ExercicioServiceImpl extends GenericServiceImpl<IExercicioRepository> implements ExercicioService {
+public class ExercicioServiceImpl extends GenericServiceImpl<ExercicioRepository> implements ExercicioService {
 
+
+    public ExercicioServiceImpl(ExercicioRepository repository, ModelMapper modelMapper) {
+        super(repository, modelMapper);
+    }
 
     @Override
     public Exercicio insert(Exercicio entity) {
